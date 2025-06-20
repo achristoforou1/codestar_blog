@@ -1,7 +1,18 @@
 {% extends 'base.html' %}
-{% block content %}
 {% load static %}
+{% load crispy_forms_tags %}  {#  Load crispy form filters #}
+
+{% block content %}
 <div class="container mt-5">
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
     <div class="row">
         <div class="col-4 text-center">
             <img src="{% static 'images/nobody.jpg' %}" width="75%">
@@ -17,6 +28,18 @@
         <div class="col text-right">
             <!-- Updated on field goes in here -->
             <p class="text-end"><em>Updated on: {{ about.updated_on }}</em></p>
+        </div>
+    </div>
+
+    <!--  New: Collaboration Request Form -->
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <h3>Collaboration Request</h3>
+            <form method="post">
+                {% csrf_token %}
+                {{ collaborate_form | crispy }}
+                <button class="btn btn-secondary" type="submit">Submit</button>
+            </form>
         </div>
     </div>
 </div>
