@@ -26,7 +26,11 @@ def about_me(request):
         collaborate_form = CollaborateForm(request.POST)
         if collaborate_form.is_valid():
             collaborate_form.save()
-            messages.success(request, "Thank you! We'll be in touch soon.")  # Success message
+            messages.success(
+                request,
+                "Collaboration request received! I endeavour to respond within 2 working days."
+            )
+
             return redirect("about")  # Prevents resubmission on refresh
     else:
         collaborate_form = CollaborateForm()

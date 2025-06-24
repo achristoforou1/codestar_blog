@@ -55,10 +55,16 @@
             <div class="card-body">
                 <!-- We want a for loop inside the empty control tags
           to iterate through each comment in comments -->
-               {% for comment in comments %}
-<div class="p-2 comments
-    {% if not comment.approved and comment.author == user %}
-    faded{% elif not comment.approved %} d-none{% endif %}">
+{% for comment in comments %}
+    {% if not comment.approved %}
+        {% if comment.author == user %}
+            <div class="p-2 comments faded">
+        {% else %}
+            <div class="p-2 comments d-none">
+        {% endif %}
+    {% else %}
+        <div class="p-2 comments">
+    {% endif %}
     <p class="font-weight-bold">
         {{ comment.author }}
         <span class="font-weight-normal">
